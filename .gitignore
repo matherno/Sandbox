@@ -1,0 +1,16 @@
+cmake-build-debug
+cmake-build-release
+.idea
+bin_debug
+bin_release
+obj
+Log.txt
+saves
+Makefile
+SettlersMyth.make
+.vscode
+bin_*
+resources
+Sandbox.code-workspace
+imgui.ini
+Sandbox.make
