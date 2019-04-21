@@ -9,27 +9,12 @@ void ItemPolygonalModel::doItemProperties(GameContext* gameContext)
   imguiCombo("3D Model", &currModelFileSel, listModelFiles);
 
   imguiSpacing();
-
-  if(ImGui::RadioButton("Single Coloured", isModelColoured))
+  imguiRadioGroup("Colour", 
     {
-    isModelColoured = true;
-    isModelVertColoured = false;
-    isModelTextured = false;
-    }
-  ImGui::SameLine();  
-  if(ImGui::RadioButton("Vertex Coloured", isModelVertColoured))
-    {
-    isModelColoured = false;
-    isModelVertColoured = true;
-    isModelTextured = false;
-    }
-  ImGui::SameLine();  
-  if(ImGui::RadioButton("Textured", isModelTextured))
-    {
-    isModelColoured = false;
-    isModelVertColoured = false;
-    isModelTextured = true;
-    }
+      { "Uniform", &isModelColoured },
+      { "Vertex", &isModelVertColoured },
+      { "Texture", &isModelTextured },
+    });
   imguiSpacing();
 
   if (isModelTextured)

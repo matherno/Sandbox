@@ -1,6 +1,7 @@
 #include "SandboxContext.h"
 #include "SandboxItems/ItemPolygonalModel.h"
 #include "SandboxItems/ItemVoxelModel.h"
+#include "SandboxItems/ItemParticleSystem.h"
 
 
 #define POPUP_CREATE_ITEM "Create Item"
@@ -121,6 +122,9 @@ SandboxItemPtr SandboxContext::createSandboxItem(SandboxItemType type)
       break;
     case SandboxItemType::voxelModel:
       item.reset(new ItemVoxelModel(id));
+      break;
+    case SandboxItemType::particleSystem:
+      item.reset(new ItemParticleSystem(id));
       break;
     default:
       ASSERT(false, "");

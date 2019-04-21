@@ -18,12 +18,7 @@ void SandboxItem::onDetached(GameContext* gameContext)
 
 void SandboxItem::doItemProperties(GameContext* gameContext)
   {
-  imguiText("Translation");
-  if(ImGui::InputDouble("X", &translation.x, 1, 10))
-    onTransformChanged();
-  if(ImGui::InputDouble("Y", &translation.y, 1, 10))
-    onTransformChanged();
-  if(ImGui::InputDouble("Z", &translation.z, 1, 10))
+  if(imguiVector3D("Translation", &translation))
     onTransformChanged();
   imguiSpacing();
   }

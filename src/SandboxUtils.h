@@ -46,6 +46,31 @@ static bool imguiButton(string text)
   return ImGui::Button(text.c_str());
   }
 
+static bool imguiVector3D(string text, Vector3D* vector)
+  {
+  float v[] = { (float)vector->x, (float)vector->y, (float)vector->z };
+  ImGui::InputFloat3(text.c_str(), v);
+  vector->x = v[0];
+  vector->y = v[1];
+  vector->z = v[2];
+  }
+
+static void imguiRadioGroup(string title, const std::list<std::pair<string, bool*>>& options)
+  {
+  if(!title.empty())
+    imguiText(title);
+  for (auto pair : options)
+    {
+    if(ImGui::RadioButton(pair.first.c_str(), *pair.second))
+      {
+      for (auto pair2 : options)
+        *pair2.second = (pair.first == pair2.first);
+      }
+    ImGui::SameLine();  
+    }
+  ImGui::NewLine();  
+  }
+
 static auto vector_getter = [](void* vec, int idx, const char** out_text)
   {
   auto& vector = *static_cast<std::vector<std::string>*>(vec);
@@ -73,6 +98,7 @@ enum class SandboxItemType
   {
   polygonalModel,
   voxelModel,
+  particleSystem,
   };
 
 
@@ -80,6 +106,7 @@ static const std::map<SandboxItemType, string> sandboxItemTypesList
   {
     { SandboxItemType::polygonalModel,    "Polygonal Model"  },
     { SandboxItemType::voxelModel,        "Voxel Model"  },
+    { SandboxItemType::particleSystem,    "Particle System"  },
   };
   
 
