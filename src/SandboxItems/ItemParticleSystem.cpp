@@ -51,6 +51,16 @@ void ItemParticleSystem::doItemProperties(GameContext* gameContext)
     imguiVector3D("Point 1", &spawnLinePt1);
     imguiVector3D("Point 2", &spawnLinePt2);
     }
+
+  imguiSpacing();
+
+  if(particleSystem && ImGui::Checkbox("Emitting", &emitting))
+    {
+    if (emitting)
+      particleSystem->startEmitters();
+    else
+      particleSystem->stopEmitters();
+    }
   }
   
 void ItemParticleSystem::refreshItem(GameContext* gameContext, string resourceDir, string* errMsg)
@@ -87,6 +97,8 @@ void ItemParticleSystem::refreshItem(GameContext* gameContext, string resourceDi
   particleSystem->addEmitter(Vector3D(0,0,0), 999999, Vector3D(particleCol[0], particleCol[1], particleCol[2]));
 
   gameContext->addActor(particleSystem);
+
+  emitting = true;
   }
 
 void ItemParticleSystem::onDetached(GameContext* gameContext)
